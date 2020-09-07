@@ -1,3 +1,4 @@
+# Set up AWS Virtual Private Cloud and networking
 data "aws_availability_zones" "available" {}
 
 resource "aws_vpc" "VPC" {
@@ -6,8 +7,7 @@ resource "aws_vpc" "VPC" {
   
   tags = {
     Name = "Fargate demo VPC"
-  }
-  
+  } 
 }
 
 resource "aws_subnet" "public" {

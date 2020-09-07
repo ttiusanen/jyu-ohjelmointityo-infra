@@ -1,10 +1,10 @@
-# Fargate infra 
+# Set up Elastic Container Service
 resource "aws_ecs_cluster" "demo_projects" {
   name = var.ecs_cluster_name
 }
 
-resource "aws_ecs_task_definition" "task_definition" {
-  family                   = "demo-projects-fargate-task"
+resource "aws_ecs_task_definition" "issueapp_task_definition" {
+  family                   = "demo-projects-ecs-task"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = "512"
@@ -14,17 +14,23 @@ resource "aws_ecs_task_definition" "task_definition" {
   container_definitions = <<DEFINITION
     [
       {
-        "image": "nginx:latest", 
+        "image": "396253542776.dkr.ecr.eu-north-1.amazonaws.com/issueapp-backend", 
         "cpu": 512,
         "memory": 4096,
-        "name": "app",
+        "name": "issueapp",
         "networkMode": "awsvpc",
+        "portMappings": [
+          {
+            "containerPort": 8080,
+            "hostPort": 8080
+          }
+        ],
         "logConfiguration": {
             "logDriver": "awslogs",
             "options": {
               "awslogs-group": "/ecs/",
               "awslogs-region": "eu-north-1",
-              "awslogs-stream-prefix": "fargate-task"
+              "awslogs-stream-prefix": "issueapp"
             }
         },
         "environment" : [
@@ -38,18 +44,25 @@ DEFINITION
 resource "aws_ecs_service" "demo_service" {
   name            = var.ecs_service_name
   cluster         = aws_ecs_cluster.demo_projects.id
-  task_definition = aws_ecs_task_definition.task_definition.arn
+  task_definition = aws_ecs_task_definition.issueapp_task_definition.arn
   desired_count   = 1
   launch_type     = "FARGATE"
+
   network_configuration {
     security_groups  = [aws_security_group.fargate_demo.id]
     subnets          = aws_subnet.public.*.id
     assign_public_ip = true
   }
+
+  load_balancer {
+    target_group_arn = aws_lb_target_group.issueapp.arn
+    container_name   = "issueapp"
+    container_port   = 8080
+  }
 }
 
 
-## Fargate execution role 
+# Fargate execution role 
 resource "aws_iam_role" "fargate_execution_role" {
   name               = "fargate-execution-role"
   assume_role_policy = <<EOF
@@ -98,7 +111,7 @@ resource "aws_iam_role_policy_attachment" "fargate_execution_policy_attachment" 
   policy_arn = aws_iam_policy.fargate_execution_policy.arn
 }
 
-## Fargate task role 
+# Fargate task role 
 resource "aws_iam_role" "fargate_role" {
   name               = "fargate-task-role"
   assume_role_policy = <<EOF

@@ -27,4 +27,12 @@ variable "ecs_service_name" {
   default = "demo-ecs-service"
 }
 
+variable "ecr_repository_name" {
+  default = "issueapp-backend"
+}
+
+variable "s3_bucket_name" {
+  default = "issueapp-frontend-v1.0"
+}
+
 

@@ -8,10 +8,6 @@ resource "aws_lb" "ecs_alb" {
   subnets            = aws_subnet.public.*.id
 
   enable_deletion_protection = true
-
-  tags = {
-    Environment = "production"
-  }
 }
 
 resource "aws_security_group" "ecs_alb_sg" {

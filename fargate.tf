@@ -30,7 +30,8 @@ resource "aws_ecs_task_definition" "issueapp_task_definition" {
             "options": {
               "awslogs-group": "/ecs/",
               "awslogs-region": "eu-north-1",
-              "awslogs-stream-prefix": "issueapp"
+              "awslogs-stream-prefix": "issueapp",
+              "awslogs-create-group": "true"
             }
         },
         "environment" : [
@@ -82,6 +83,11 @@ resource "aws_iam_role" "fargate_execution_role" {
 EOF
 }
 
+#        "ecr:GetAuthorizationToken",
+#        "ecr:BatchCheckLayerAvailability",
+#        "ecr:GetDownloadUrlForLayer",
+#        "ecr:BatchGetImage",
+
 resource "aws_iam_policy" "fargate_execution_policy" {
   name   = "fargate-execution-policy"
   path   = "/"
@@ -91,11 +97,9 @@ resource "aws_iam_policy" "fargate_execution_policy" {
   "Statement": [
     {
       "Action": [
-        "ecr:GetAuthorizationToken",
-        "ecr:BatchCheckLayerAvailability",
-        "ecr:GetDownloadUrlForLayer",
-        "ecr:BatchGetImage",
+        "ecr:*",
         "logs:CreateLogStream",
+        "logs:CreateLogGroup",
         "logs:PutLogEvents"
       ],
       "Effect": "Allow",
@@ -154,4 +158,13 @@ resource "aws_iam_policy" "fargate_policy" {
 resource "aws_iam_role_policy_attachment" "fargate_policy_attachment" {
   role       = aws_iam_role.fargate_role.name
   policy_arn = aws_iam_policy.fargate_policy.arn
+}
+
+resource "aws_cloudwatch_log_group" "ecs_logs" {
+  name = "/ecs/"
+
+  tags = {
+    Environment = "production"
+    Application = "serviceA"
+  }
 }

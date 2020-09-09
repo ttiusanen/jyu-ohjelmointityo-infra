@@ -1,5 +1,7 @@
 # Set up AWS Virtual Private Cloud and networking
-data "aws_availability_zones" "available" {}
+data "aws_availability_zones" "available" {
+  state = "available"
+}
 
 resource "aws_vpc" "VPC" {
   cidr_block           = var.vpc_cidr
@@ -15,6 +17,7 @@ resource "aws_subnet" "public" {
   vpc_id            = aws_vpc.VPC.id
   cidr_block        = var.public_subnet_cidrs[count.index]
   availability_zone = data.aws_availability_zones.available.names[count.index]
+  map_public_ip_on_launch = true
 
   tags = {
     Name = "public-subnet-${count.index}"

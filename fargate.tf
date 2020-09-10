@@ -14,7 +14,7 @@ resource "aws_ecs_task_definition" "issueapp_task_definition" {
   container_definitions = <<DEFINITION
     [
       {
-        "image": "396253542776.dkr.ecr.eu-north-1.amazonaws.com/issueapp-backend", 
+        "image": "396253542776.dkr.ecr.eu-north-1.amazonaws.com/issueapp-backend:v1.0", 
         "cpu": 512,
         "memory": 4096,
         "name": "issueapp",
@@ -83,10 +83,7 @@ resource "aws_iam_role" "fargate_execution_role" {
 EOF
 }
 
-#        "ecr:GetAuthorizationToken",
-#        "ecr:BatchCheckLayerAvailability",
-#        "ecr:GetDownloadUrlForLayer",
-#        "ecr:BatchGetImage",
+#        
 
 resource "aws_iam_policy" "fargate_execution_policy" {
   name   = "fargate-execution-policy"
@@ -97,7 +94,10 @@ resource "aws_iam_policy" "fargate_execution_policy" {
   "Statement": [
     {
       "Action": [
-        "ecr:*",
+        "ecr:GetAuthorizationToken",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchGetImage",
         "logs:CreateLogStream",
         "logs:CreateLogGroup",
         "logs:PutLogEvents"

@@ -32,7 +32,7 @@ variable "ecr_repository_name" {
 }
 
 variable "s3_bucket_name" {
-  default = "issueapp-frontend-v1.0"
+  default = "issueapp"
 }
 
 

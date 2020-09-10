@@ -14,7 +14,7 @@ resource "aws_s3_bucket" "issueapp" {
         "s3:GetObject"
       ],
       "Resource": [
-        "arn:aws:s3:::issueapp-frontend-v1.0/*"
+        "arn:aws:s3:::issueapp/*"
       ]
     }
   ]

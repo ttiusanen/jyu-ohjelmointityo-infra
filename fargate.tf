@@ -14,7 +14,7 @@ resource "aws_ecs_task_definition" "issueapp_task_definition" {
   container_definitions = <<DEFINITION
     [
       {
-        "image": "396253542776.dkr.ecr.eu-north-1.amazonaws.com/issueapp-backend", 
+        "image": "396253542776.dkr.ecr.eu-north-1.amazonaws.com/issueapp-backend:v1.0", 
         "cpu": 512,
         "memory": 4096,
         "name": "issueapp",

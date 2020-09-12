@@ -1,6 +1,6 @@
 ## AWS ECS infra with Terraform
 
-Configurations for creating hosting environment for website and backend. S3 bucket is created for hosting a static website. ECS service and Fargate task is created for running backend service.
+Configurations for creating hosting environment in AWS cloud for website and backend. S3 bucket is created for hosting a static website. ECS service and Fargate task is created for running backend service.
 
 ### Dependencies
 

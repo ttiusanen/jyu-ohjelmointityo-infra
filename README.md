@@ -8,7 +8,7 @@ AWS client
 
 AWS account and IAM user with privileges for used services
 
-Docker account and docker image for backend
+Docker
 
 Terraform
 

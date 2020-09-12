@@ -11,9 +11,9 @@ Docker account and docker image for backend
 
 ### Usage
 
-1. Make sure you have your AWS credentials set in `$HOME/.aws/credentials` (Linux) or in `$USERPROFILE/.aws/credentials` (Windows) for correct AWS environment.
+Make sure you have your AWS credentials set in `$HOME/.aws/credentials` (Linux) or in `$USERPROFILE/.aws/credentials` (Windows) for correct AWS environment.
 
-2. Push your Docker image to ECR by following these steps
+Push your Docker image to ECR by following these steps
 
 - Set up Docker with ECR by running `aws ecr get-login-password --region <your_region> | docker login --username AWS --password-stdin <your_account_id>.dkr.ecr.<your.region>.amazonaws.com`
 
@@ -21,9 +21,9 @@ Docker account and docker image for backend
 
 - Push your image to ECR with command `docker push <your_account_id>.dkr.ecr.<your.region>.amazonaws.com/image:tag`
 
-3. Change Fargate task definition according to your image URI.
+Change Fargate task definition according to your image URI.
 
-4. Deploy your website to S3 by running `aws s3 sync /<your_application_build> s3://<your_bucket_name>`
+Deploy your website to S3 by running `aws s3 sync /<your_application_build> s3://<your_bucket_name>`
 
-5. Check S3 bucket public address and enjoy!
+Check S3 bucket public address and enjoy!
 

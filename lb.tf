@@ -47,6 +47,12 @@ resource "aws_lb_target_group" "issueapp" {
   vpc_id   = aws_vpc.VPC.id
   target_type = "ip"
 
+  # Should configure this differently for production purposes 
+  health_check {
+    path   = "/actuator/health"
+    port   = 8080
+  }
+
   # aws_lb resource needs to be created before target group is
   # linked to ECS service
   depends_on = [

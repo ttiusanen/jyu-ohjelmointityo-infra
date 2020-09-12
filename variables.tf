@@ -35,4 +35,8 @@ variable "s3_bucket_name" {
   default = "issueapp"
 }
 
+variable "s3_cors_allowed_origin" {
+  default = "http://issueapp-alb-1187199747.eu-north-1.elb.amazonaws.com"
+}
+
 

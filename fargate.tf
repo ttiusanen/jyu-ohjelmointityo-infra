@@ -19,6 +19,7 @@ resource "aws_ecs_task_definition" "issueapp_task_definition" {
         "memory": 4096,
         "name": "issueapp",
         "networkMode": "awsvpc",
+        "healthCheckGracePeriodSeconds": 2147483000,
         "portMappings": [
           {
             "containerPort": 8080,

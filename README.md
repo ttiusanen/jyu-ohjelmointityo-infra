@@ -5,8 +5,11 @@ Configurations for creating hosting environment for website and backend. S3 buck
 ### Dependencies
 
 AWS client
+
 AWS account and IAM user with privileges for used services
+
 Local AWS credentials
+
 Docker account and docker image for backend
 
 ### Usage

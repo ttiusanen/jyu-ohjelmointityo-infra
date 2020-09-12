@@ -15,11 +15,11 @@ Docker account and docker image for backend
 
 2. Push your Docker image to ECR by following these steps
 
-Set up Docker with ECR by running `aws ecr get-login-password --region <your_region> | docker login --username AWS --password-stdin <your_account_id>.dkr.ecr.<your.region>.amazonaws.com`
+- Set up Docker with ECR by running `aws ecr get-login-password --region <your_region> | docker login --username AWS --password-stdin <your_account_id>.dkr.ecr.<your.region>.amazonaws.com`
 
-Build your Docker image with tag `<your_account_id>.dkr.ecr.<your.region>.amazonaws.com/image:tag`
+- Build your Docker image with tag `<your_account_id>.dkr.ecr.<your.region>.amazonaws.com/image:tag`
 
-Push your image to ECR with command `docker push <your_account_id>.dkr.ecr.<your.region>.amazonaws.com/image:tag`
+- Push your image to ECR with command `docker push <your_account_id>.dkr.ecr.<your.region>.amazonaws.com/image:tag`
 
 3. Change Fargate task definition according to your image URI.
 

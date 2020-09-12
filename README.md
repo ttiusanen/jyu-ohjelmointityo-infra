@@ -12,9 +12,15 @@ Local AWS credentials
 
 Docker account and docker image for backend
 
+Terraform
+
 ### Usage
 
-Make sure you have your AWS credentials set in `$HOME/.aws/credentials` (Linux) or in `$USERPROFILE\.aws\credentials` (Windows) for correct AWS environment.
+Clone this repo to your local environment and run `terraform init` in project root.
+
+Make sure you have your AWS credentials set in `$HOME/.aws/credentials` (Linux) or in `$USERPROFILE\.aws\credentials` (Windows) for correct AWS environment. AWS profile is given in `variables.tf`.
+
+Check that configuration is working by running `terraform plan`. If no problems exist deploy configuration to aws by running `terraform apply`.
 
 Push your Docker image to ECR by following these steps
 

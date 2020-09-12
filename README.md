@@ -8,8 +8,6 @@ AWS client
 
 AWS account and IAM user with privileges for used services
 
-Local AWS credentials
-
 Docker account and docker image for backend
 
 Terraform

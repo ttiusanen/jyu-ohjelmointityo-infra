@@ -11,7 +11,7 @@ Docker account and docker image for backend
 
 ### Usage
 
-Make sure you have your AWS credentials set in `$HOME/.aws/credentials` (Linux) or in `$USERPROFILE/.aws/credentials` (Windows) for correct AWS environment.
+Make sure you have your AWS credentials set in `$HOME/.aws/credentials` (Linux) or in `$USERPROFILE\.aws\credentials` (Windows) for correct AWS environment.
 
 Push your Docker image to ECR by following these steps
 
